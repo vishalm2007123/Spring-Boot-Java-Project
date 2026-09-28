@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenLog | Plantation tracker</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="GreenLog home">
+            <span class="brand-mark">GL</span>
+            <span><strong>GreenLog</strong><small>plantation tracker</small></span>
+        </a>
+        <nav class="side-nav" aria-label="Primary navigation">
+            <a class="nav-link active" href="#overview">Overview</a>
+            <a class="nav-link" href="#activity">Activity</a>
+            <a class="nav-link" href="#add-record">Add record</a>
+        </nav>
+        <div class="sidebar-note">
+            <span class="status-dot"></span>
+            <div><strong>Growing together</strong><small>A shared record of your campus work</small></div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Sustainability operations</p>
+                <h1>Good work takes root.</h1>
+            </div>
+            <div class="topbar-meta"><span id="today-label"></span><span class="api-pill">Together, we grow</span></div>
+        </header>
+
+        <section id="overview" class="hero-section">
+            <div class="hero-copy">
+                <p class="eyebrow">GreenLog dashboard</p>
+                <h2>See every planted tree, <em>growing together.</em></h2>
+                <p class="hero-description">Keep your campus drives visible, your volunteers engaged, and every follow-up check-in on time.</p>
+                <a class="button button-dark" href="#add-record">Add a record <span aria-hidden="true">+</span></a>
+            </div>
+            <div class="hero-illustration" aria-hidden="true">
+                <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+                <div class="tree-shape"><span class="canopy canopy-one"></span><span class="canopy canopy-two"></span><span class="trunk"></span></div>
+                <div class="hero-caption"><strong id="hero-alive">0</strong><span>trees currently alive</span></div>
+            </div>
+        </section>
+
+        <section class="metrics-grid" aria-label="Plantation metrics">
+            <article class="metric metric-green"><span class="metric-label">Total trees</span><strong id="metric-trees">0</strong><span class="metric-foot">Across all drives</span></article>
+            <article class="metric metric-cream"><span class="metric-label">Survival rate</span><strong id="metric-survival">0%</strong><span class="metric-foot">Based on current status</span></article>
+            <article class="metric metric-dark"><span class="metric-label">Plantation drives</span><strong id="metric-drives">0</strong><span class="metric-foot">Moments that made a difference</span></article>
+            <article class="metric metric-orange"><span class="metric-label">Volunteers</span><strong id="metric-volunteers">0</strong><span class="metric-foot">People making an impact</span></article>
+        </section>
+
+        <section id="insights" class="insights-grid">
+            <div class="section-block insight-panel">
+                <div class="section-heading"><div><p class="eyebrow">How each drive is doing</p><h3>Survival by drive</h3></div><span class="mini-label">alive today</span></div>
+                <div id="drive-insights" class="insight-list"><div class="empty-state">Add a tree to see progress here.</div></div>
+            </div>
+            <div class="section-block insight-panel">
+                <div class="section-heading"><div><p class="eyebrow">Which species are thriving</p><h3>Survival by species</h3></div><span class="mini-label">alive today</span></div>
+                <div id="species-insights" class="insight-list"><div class="empty-state">Add a tree to see progress here.</div></div>
+            </div>
+        </section>
+
+        <section id="activity" class="content-grid">
+            <div class="section-block">
+                <div class="section-heading"><div><p class="eyebrow">Needs attention</p><h3>Due for a check-in</h3></div><span class="count-badge" id="due-count">0</span></div>
+                <div id="due-list" class="record-list"><div class="empty-state">No trees are due today.</div></div>
+            </div>
+            <div class="section-block leaderboard-block">
+                <div class="section-heading"><div><p class="eyebrow">Community effort</p><h3>Volunteer leaderboard</h3></div><span class="mini-label">trees planted</span></div>
+                <div id="leaderboard" class="leaderboard-list"><div class="empty-state">No volunteers recorded yet.</div></div>
+            </div>
+        </section>
+
+        <section class="section-block recent-block">
+            <div class="section-heading"><div><p class="eyebrow">Plantation history</p><h3>Recent trees</h3></div><div class="table-actions"><label class="search-box"><span aria-hidden="true">⌕</span><input id="tree-search" type="search" placeholder="Search species or place" aria-label="Search trees"></label><button class="text-button" id="refresh-button" type="button">Refresh</button></div></div>
+            <div class="table-wrap"><table><thead><tr><th>Species</th><th>Location</th><th>Drive</th><th>Planted</th><th>Status</th></tr></thead><tbody id="trees-table"><tr><td colspan="5" class="empty-state">Loading trees...</td></tr></tbody></table></div>
+        </section>
+
+        <section id="add-record" class="section-block form-section">
+            <div class="section-heading"><div><p class="eyebrow">Keep the log growing</p><h3>Add a new record</h3></div><span class="mini-label">Add a moment from the field</span></div>
+            <div class="form-tabs" role="tablist">
+                <button class="form-tab active" data-form="drive-form" type="button">Plantation drive</button>
+                <button class="form-tab" data-form="volunteer-form" type="button">Volunteer</button>
+                <button class="form-tab" data-form="tree-form" type="button">Tree</button>
+                <button class="form-tab" data-form="checkin-form" type="button">Check-in</button>
+            </div>
+            <form id="drive-form" class="record-form active-form">
+                <div class="form-grid"><label>Drive name<input name="name" required placeholder="Green Campus Drive"></label><label>Location<input name="location" required placeholder="North Campus"></label><label>Date<input name="driveDate" type="date" required></label><label class="wide-field">Description<textarea name="description" rows="2" placeholder="What was planted and who joined?"></textarea></label></div>
+                <button class="button button-dark" type="submit">Save plantation drive</button>
+            </form>
+            <form id="volunteer-form" class="record-form">
+                <div class="form-grid"><label>Name<input name="name" required placeholder="Volunteer name"></label><label>Email<input name="email" type="email" required placeholder="name@example.com"></label><label>Phone<input name="phone" placeholder="Optional phone number"></label></div>
+                <button class="button button-dark" type="submit">Save volunteer</button>
+            </form>
+            <form id="tree-form" class="record-form">
+                <div class="form-grid"><label>Species<input name="species" required placeholder="Neem"></label><label>Location<input name="location" required placeholder="North Campus"></label><label>Date planted<input name="datePlanted" type="date" required></label><label>Next check-in<input name="nextCheckInDate" type="date"></label><label>Plantation drive<select name="plantationDriveId" id="drive-select" required><option value="">Select a drive</option></select></label><label>Volunteer<select name="volunteerId" id="volunteer-select"><option value="">Optional volunteer</option></select></label></div>
+                <button class="button button-dark" type="submit">Save planted tree</button>
+            </form>
+            <form id="checkin-form" class="record-form">
+                <div class="form-grid"><label>Tree<select name="treeId" id="tree-select" required><option value="">Select a tree</option></select></label><label>Check-in date<input name="checkInDate" type="date" required></label><label>Status<select name="status" required><option value="ALIVE">Alive</option><option value="DEAD">Dead</option></select></label><label class="wide-field">Notes<textarea name="notes" rows="2" placeholder="Describe the tree's condition"></textarea></label></div>
+                <button class="button button-dark" type="submit">Save check-in</button>
+            </form>
+            <p id="form-message" class="form-message" role="status"></p>
+        </section>
+        <footer><span>GreenLog</span><span>Tree Plantation Drive Tracker</span></footer>
+    </main>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
